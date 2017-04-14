@@ -23,7 +23,7 @@ public class AlgorithmeGreedy extends AlgorithmeFormat {
     protected SolutionPartielle getMeilleureSolution() {
         double opt = 0;
         SolutionPartielle meilleure = null;
-        for(SolutionPartielle s : ouvert){
+        for(SolutionPartielle s : ferme){
             if(problemeAResoudre.evaluer(s) >= opt){
                 meilleure = s;
                 opt = problemeAResoudre.evaluer(s);
@@ -35,10 +35,15 @@ public class AlgorithmeGreedy extends AlgorithmeFormat {
     @Override
     protected SolutionPartielle[] filtrer(SolutionPartielle[] voisins) {
         SolutionPartielle sp = null;
+        double opt = 0;
         for(SolutionPartielle s : voisins){
             if(!s.invalide()){
-                sp = s;
+                if(problemeAResoudre.evaluer(s) > opt){
+                    opt = problemeAResoudre.evaluer(s);
+                    sp = s;
+                }
             }
+            compteur++;
         }
 
         return new SolutionPartielle[]{sp};
@@ -46,7 +51,7 @@ public class AlgorithmeGreedy extends AlgorithmeFormat {
 
     @Override
     protected boolean etreFini() {
-        for(SolutionPartielle s : ferme){
+        for(SolutionPartielle s : ouvert){
             return s.estComplete();
         }
         return false;
