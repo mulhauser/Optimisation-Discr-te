@@ -3,6 +3,7 @@ package algorithmeFormat;
 import generic.Problem;
 import generic.SolutionPartielle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,12 +34,13 @@ public class AlgorithmeParcoursProfondeur extends AlgorithmeFormat {
 
     @Override
     protected SolutionPartielle[] filtrer(SolutionPartielle[] voisins) {
-
+        compteur++;
         return voisins;
     }
 
     @Override
     protected boolean etreFini() {
+
         return ouvert.isEmpty();
     }
 
